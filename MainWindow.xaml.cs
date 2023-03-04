@@ -25,9 +25,6 @@ namespace MyToDoApp
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("hello world!");
-        }
+        private void Button_Click(object sender, RoutedEventArgs e) => MessageBox.Show("hello world!");//gittest
     }
 }
