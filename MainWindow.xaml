@@ -30,15 +30,20 @@
             </materialDesign:DrawerHost.LeftDrawerContent>
 
             <DockPanel>
-                <materialDesign:ColorZone Padding="16"
+                <materialDesign:ColorZone Padding="16" x:Name="ColorZone"
                                   materialDesign:ElevationAssist.Elevation="Dp4"
                                   DockPanel.Dock="Top"
                                   Mode="PrimaryMid">
                     <DockPanel LastChildFill="True">
                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                            <Button Content="-" Style="{StaticResource MaterialDesignFlatMidBgButton}"></Button>
-                            <Button Content="-" Style="{StaticResource MaterialDesignFlatMidBgButton}"></Button>
-                            <Button Content="-" Style="{StaticResource MaterialDesignFlatMidBgButton}"></Button>
+                            <Image Source="/Image/小新.jpg" Width="25" Height="25">
+                                <Image.Clip>
+                                    <EllipseGeometry Center="12.5,12.5" RadiusX="12.5" RadiusY="12.5"></EllipseGeometry>
+                                </Image.Clip>
+                            </Image>
+                            <Button x:Name="btnMin" Content="—" Style="{StaticResource MaterialDesignFlatMidBgButton}"></Button>
+                            <Button x:Name="btnMax" Content="☐" Style="{StaticResource MaterialDesignFlatMidBgButton}"></Button>
+                            <Button x:Name="btnClose" Content="✕" Style="{StaticResource MaterialDesignFlatMidBgButton}"></Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <ToggleButton x:Name="MenuToggleButton"
