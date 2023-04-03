@@ -8,6 +8,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using MyToDoApp.ViewModels;
+using MyToDoApp.Views;
 
 namespace MyToDoApp
 {
@@ -18,13 +20,18 @@ namespace MyToDoApp
     {
         protected override Window CreateShell()
         {
-            return Container.Resolve<MainWindow>();
+            return Container.Resolve<MainView>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterForNavigation<IndexView,IndexViewModel>();
+            containerRegistry.RegisterForNavigation<ToDoView,ToDoViewModel>();
+            containerRegistry.RegisterForNavigation<MemoView,MemoViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsView,SettingsViewModel>();
         }
+
+
 
     }
 }
