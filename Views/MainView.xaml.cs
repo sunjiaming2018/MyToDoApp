@@ -53,6 +53,12 @@ namespace MyToDoApp.Views
                     this.WindowState = WindowState.Normal;
                 }
             };
+            menuBar.SelectionChanged += MenuBar_SelectionChanged;
+        }
+
+        private void MenuBar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            drawerHost.IsLeftDrawerOpen = false;
         }
     }
 }

@@ -20,6 +20,20 @@ namespace MyToDoApp.ViewModels
             MenuBars = new ObservableCollection<MenuBar>();
             CreateMenuBar();
             NavigateCommand = new DelegateCommand<MenuBar>(Navigate);
+            GoBackCommand = new DelegateCommand(() =>
+            {
+                if (journal != null && journal.CanGoBack)
+                {
+                    journal.GoBack();
+                }
+            });
+            GoForwardCommand = new DelegateCommand(() =>
+            {
+                if (journal != null && journal.CanGoForward)
+                {
+                    journal.GoForward();
+                }
+            });
             this.regionManager = regionManager;
         }
 
@@ -29,20 +43,6 @@ namespace MyToDoApp.ViewModels
             regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate(menuBar.NameSpace, back =>
             {
                 journal = back.Context.NavigationService.Journal;
-            });
-            GoBackCommand = new DelegateCommand(() =>
-            {
-                if (journal.CanGoBack)
-                {
-                    journal.GoBack();
-                }
-            });
-            GoForwardCommand = new DelegateCommand(() =>
-            {
-                if (journal.CanGoForward)
-                {
-                    journal.GoForward();
-                }
             });
         }
 
