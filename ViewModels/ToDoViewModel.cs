@@ -24,7 +24,7 @@ namespace MyToDoApp.ViewModels
         public bool IsRightDrawerOpen
         {
             get { return isRightDrawerOpen; }
-            set { isRightDrawerOpen = value; }
+            set { isRightDrawerOpen = value; RaisePropertyChanged(); }
         }
 
         private void Add()
