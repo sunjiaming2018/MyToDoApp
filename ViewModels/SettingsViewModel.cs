@@ -28,7 +28,7 @@ namespace MyToDoApp.ViewModels
         private void Navigate(MenuBar menuBar)
         {
             if (menuBar == null || string.IsNullOrWhiteSpace(menuBar.NameSpace)) return;
-            regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate(menuBar.NameSpace);
+            regionManager.Regions[PrismManager.SettingsViewRegionName].RequestNavigate(menuBar.NameSpace);
         }
 
         public ObservableCollection<MenuBar> MenuBars
@@ -40,7 +40,7 @@ namespace MyToDoApp.ViewModels
         void CreateMenuBar()
         {
             MenuBars.Add(new MenuBar(){Icon = "Palette", Title = "个性化", NameSpace = "SkinView"});
-            MenuBars.Add(new MenuBar(){Icon = "Cog", Title = "系统设置", NameSpace = "ToDoView"});
+            MenuBars.Add(new MenuBar(){Icon = "Cog", Title = "系统设置", NameSpace = ""});
             MenuBars.Add(new MenuBar(){Icon = "Information", Title = "关于更多", NameSpace = "AboutView"});
         }
     }
