@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using MyToDo.Api;
 using MyToDo.Api.Context;
+using MyToDo.Api.Context.Repository;
+using MyToDo.Api.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +14,11 @@ builder.Services.AddDbContext<MyToDoContext>(opt =>
 {
     var connectionString = builder.Configuration.GetConnectionString("ToDoConnection");
     opt.UseSqlite(connectionString);
-});
+}).AddUnitOfWork<MyToDoContext>()
+.AddCustomRepository<ToDo,ToDoRepository>()
+.AddCustomRepository<Memo,MemoRepository>()
+.AddCustomRepository<User,UserRepository>();
+builder.Services.AddTransient<IToDoService, ToDoService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

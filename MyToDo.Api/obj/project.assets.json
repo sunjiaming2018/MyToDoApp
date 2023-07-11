@@ -95,6 +95,22 @@
           "lib/netstandard2.0/_._": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.AutoHistory/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.AutoHistory.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.AutoHistory.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Design/7.0.5": {
         "type": "package",
         "dependencies": {
@@ -669,6 +685,16 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "MyToDo.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/MyToDo.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MyToDo.Shared.dll": {}
+        }
       }
     }
   },
@@ -763,6 +789,19 @@
         "lib/netstandard2.0/_._",
         "microsoft.entityframeworkcore.analyzers.7.0.5.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.AutoHistory/6.0.0": {
+      "sha512": "Nkbq+sxt4qN15Ufy+xMgMmuSJZWKxCZ8yMkC4Gl6bxt5IGecLi30oZkSyQqXwYx6D8H66f6ECCgheN6UVApGFg==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.autohistory/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.AutoHistory.dll",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.AutoHistory.xml",
+        "microsoft.entityframeworkcore.autohistory.6.0.0.nupkg.sha512",
+        "microsoft.entityframeworkcore.autohistory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Design/7.0.5": {
@@ -1740,14 +1779,21 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "MyToDo.Shared/1.0.0": {
+      "type": "project",
+      "path": "../MyToDo.Shared/MyToDo.Shared.csproj",
+      "msbuildProject": "../MyToDo.Shared/MyToDo.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "Microsoft.AspNetCore.OpenApi >= 7.0.3",
+      "Microsoft.EntityFrameworkCore.AutoHistory >= 6.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Sqlite >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
+      "MyToDo.Shared >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
@@ -1769,6 +1815,7 @@
       ],
       "configFilePaths": [
         "C:\\Users\\Sun\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1776,6 +1823,7 @@
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
         "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
@@ -1784,7 +1832,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Sun\\source\\repos\\sunjiaming2018\\MyToDoApp\\MyToDo.Shared\\MyToDo.Shared.csproj": {
+              "projectPath": "C:\\Users\\Sun\\source\\repos\\sunjiaming2018\\MyToDoApp\\MyToDo.Shared\\MyToDo.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -1800,6 +1852,10 @@
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[7.0.3, )"
+          },
+          "Microsoft.EntityFrameworkCore.AutoHistory": {
+            "target": "Package",
+            "version": "[6.0.0, )"
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

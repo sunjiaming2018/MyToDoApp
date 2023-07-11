@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "31BEWP6gLYkmetp74IhYrQ/eD7sgFxh7d7N2BUZAlv0HFLz2rls+H42wAbD2wP1Af3QsE/XhQLMKYMp66Fj3nw==",
+  "dgSpecHash": "V6aWcqJ5o8a/Y0G9CfbY1vj15SFa19L1ysnn8Fi6FdzdtORRw5NriH6Of6RCvsEdF2S8DNdGsmMVuuPHeBkEzw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Sun\\source\\repos\\sunjiaming2018\\MyToDoApp\\MyToDo.Api\\MyToDo.Api.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\Sun\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.5\\microsoft.entityframeworkcore.7.0.5.nupkg.sha512",
     "C:\\Users\\Sun\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.5\\microsoft.entityframeworkcore.abstractions.7.0.5.nupkg.sha512",
     "C:\\Users\\Sun\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.5\\microsoft.entityframeworkcore.analyzers.7.0.5.nupkg.sha512",
+    "C:\\Users\\Sun\\.nuget\\packages\\microsoft.entityframeworkcore.autohistory\\6.0.0\\microsoft.entityframeworkcore.autohistory.6.0.0.nupkg.sha512",
     "C:\\Users\\Sun\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.5\\microsoft.entityframeworkcore.design.7.0.5.nupkg.sha512",
     "C:\\Users\\Sun\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.5\\microsoft.entityframeworkcore.relational.7.0.5.nupkg.sha512",
     "C:\\Users\\Sun\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\7.0.5\\microsoft.entityframeworkcore.sqlite.7.0.5.nupkg.sha512",
