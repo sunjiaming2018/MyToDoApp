@@ -19,6 +19,8 @@ builder.Services.AddDbContext<MyToDoContext>(opt =>
 .AddCustomRepository<Memo,MemoRepository>()
 .AddCustomRepository<User,UserRepository>();
 builder.Services.AddTransient<IToDoService, ToDoService>();
+builder.Services.AddTransient<ILoginService, LoginService>();
+builder.Services.AddTransient<IMemoService, MemoService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
