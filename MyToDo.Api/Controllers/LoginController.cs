@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MyToDo.Shared.Dtos;
 
 namespace MyToDo.Api.Controllers
 {
@@ -23,11 +24,11 @@ namespace MyToDo.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResponse> Login([FromBody] User param) =>
-            await service.LoginAsync(param.Account, param.Password);
+        public async Task<ApiResponse> Login([FromBody] UserDto param) =>
+            await service.LoginAsync(param.Account, param.PassWord);
 
         [HttpPost]
-        public async Task<ApiResponse> Resgiter([FromBody] User param) =>
+        public async Task<ApiResponse> Resgiter([FromBody] UserDto param) =>
             await service.Resgiter(param);
 
     }

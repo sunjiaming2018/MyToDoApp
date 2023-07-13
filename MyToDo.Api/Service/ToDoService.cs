@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using AutoMapper;
 using MyToDo.Shared;
+using MyToDo.Shared.Dtos;
+using MyToDo.Shared.Parameters;
 
 namespace MyToDo.Api.Service
 {
@@ -14,17 +17,19 @@ namespace MyToDo.Api.Service
     public class ToDoService : IToDoService
     {
         private readonly IUnitOfWork work;
-
-        public ToDoService(IUnitOfWork work)
+        private readonly IMapper Mapper;
+        public ToDoService(IUnitOfWork work,IMapper mapper)
         {
             this.work = work;
+            Mapper = mapper;
         }
 
-        public async Task<ApiResponse> AddAsync(ToDo model)
+        public async Task<ApiResponse> AddAsync(ToDoDto model)
         {
             try
             {
-                await work.GetRepository<ToDo>().InsertAsync(model);
+                var todo = Mapper.Map<ToDo>(model);
+                await work.GetRepository<ToDo>().InsertAsync(todo);
                 if (await work.SaveChangesAsync() > 0)
                     return new ApiResponse(true, model);
                 return new ApiResponse("添加数据失败");
@@ -53,12 +58,35 @@ namespace MyToDo.Api.Service
             }
         }
 
-        public async Task<ApiResponse> GetAllAsync()
+        public async Task<ApiResponse> GetAllAsync(QueryParameter parameter)
         {
             try
             {
                 var repository = work.GetRepository<ToDo>();
-                var todos = await repository.GetAllAsync();
+                var todos = await repository.GetPagedListAsync(predicate:
+                    x => string.IsNullOrWhiteSpace(parameter.Search) ? true : x.Title.Contains(parameter.Search),
+                    pageIndex: parameter.PageIndex,
+                    pageSize: parameter.PageSize,
+                    orderBy: source => source.OrderByDescending(t => t.CreDateTime));
+                return new ApiResponse(true, todos);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse(ex.Message);
+            }
+        }
+
+        public async Task<ApiResponse> GetAllAsync(ToDoParameter parameter)
+        {
+            try
+            {
+                var repository = work.GetRepository<ToDo>();
+                var todos = await repository.GetPagedListAsync(predicate:
+                    x => (string.IsNullOrWhiteSpace(parameter.Search) ? true : x.Title.Contains(parameter.Search))
+                         && (parameter.Status == null ? true : x.Status.Equals(parameter.Status)),
+                    pageIndex: parameter.PageIndex,
+                    pageSize: parameter.PageSize,
+                    orderBy: source => source.OrderByDescending(t => t.CreDateTime));
                 return new ApiResponse(true,todos);
             }
             catch (Exception ex)
@@ -81,16 +109,17 @@ namespace MyToDo.Api.Service
             }
         }
 
-        public async Task<ApiResponse> UpdateAsync(ToDo model)
+        public async Task<ApiResponse> UpdateAsync(ToDoDto model)
         {
             try
             {
+                var dbtodo = Mapper.Map<ToDo>(model);
                 var repository = work.GetRepository<ToDo>();
-                var todo = await repository.GetFirstOrDefaultAsync(predicate: x => x.Id.Equals(model.Id));
+                var todo = await repository.GetFirstOrDefaultAsync(predicate: x => x.Id.Equals(dbtodo.Id));
 
-                todo.Title = model.Title;
-                todo.Content = model.Content;
-                todo.Status = model.Status;
+                todo.Title = dbtodo.Title;
+                todo.Content = dbtodo.Content;
+                todo.Status = dbtodo.Status;
                 todo.Updatetime = DateTime.Now;
 
                 repository.Update(todo);

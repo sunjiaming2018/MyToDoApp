@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MyToDo.Shared.Parameters;
 
 namespace MyToDo.Api.Service
 {
     public interface IBaseService<T>
     {
-        Task<ApiResponse> GetAllAsync();
+        Task<ApiResponse> GetAllAsync(QueryParameter parameter);
 
         Task<ApiResponse> GetSingleAsync(int id);
 

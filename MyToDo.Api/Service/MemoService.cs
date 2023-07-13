@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using MyToDo.Shared.Dtos;
+using MyToDo.Shared.Parameters;
 
 namespace MyToDo.Api.Service
 {
@@ -12,17 +15,19 @@ namespace MyToDo.Api.Service
     public class MemoService : IMemoService
     {
         private readonly IUnitOfWork work;
-
-        public MemoService(IUnitOfWork work)
+        private readonly IMapper Mapper;
+        public MemoService(IUnitOfWork work,IMapper mapper)
         {
             this.work = work;
+            Mapper = mapper;
         }
 
-        public async Task<ApiResponse> AddAsync(Memo model)
+        public async Task<ApiResponse> AddAsync(MemoDto model)
         {
             try
             {
-                await work.GetRepository<Memo>().InsertAsync(model);
+                var memo = Mapper.Map<Memo>(model);
+                await work.GetRepository<Memo>().InsertAsync(memo);
                 if (await work.SaveChangesAsync() > 0)
                     return new ApiResponse(true, model);
                 return new ApiResponse("添加数据失败");
@@ -51,12 +56,16 @@ namespace MyToDo.Api.Service
             }
         }
 
-        public async Task<ApiResponse> GetAllAsync()
+        public async Task<ApiResponse> GetAllAsync(QueryParameter parameter)
         {
             try
             {
                 var repository = work.GetRepository<Memo>();
-                var todos = await repository.GetAllAsync();
+                var todos = await repository.GetPagedListAsync(predicate:
+                    x => string.IsNullOrWhiteSpace(parameter.Search) ? true : x.Title.Contains(parameter.Search),
+                    pageIndex: parameter.PageIndex,
+                    pageSize: parameter.PageSize,
+                    orderBy: source => source.OrderByDescending(t => t.CreDateTime));
                 return new ApiResponse(true, todos);
             }
             catch (Exception ex)
@@ -79,15 +88,16 @@ namespace MyToDo.Api.Service
             }
         }
 
-        public async Task<ApiResponse> UpdateAsync(Memo model)
+        public async Task<ApiResponse> UpdateAsync(MemoDto model)
         {
             try
             {
+                var dbToDo = Mapper.Map<Memo>(model);
                 var repository = work.GetRepository<Memo>();
-                var todo = await repository.GetFirstOrDefaultAsync(predicate: x => x.Id.Equals(model.Id));
+                var todo = await repository.GetFirstOrDefaultAsync(predicate: x => x.Id.Equals(dbToDo.Id));
 
-                todo.Title = model.Title;
-                todo.Content = model.Content;
+                todo.Title = dbToDo.Title;
+                todo.Content = dbToDo.Content;
                 todo.Updatetime = DateTime.Now;
 
                 repository.Update(todo);
